@@ -8,6 +8,7 @@ public class Dealer  {
 	private int total=0;
 	private int end=0;			// 종료
 	private int roundlose=0;	// 라운드에서 진
+	private int same=0;
 	
 	Random rand = new Random(); 
 	
@@ -63,10 +64,15 @@ public class Dealer  {
 	//**********라운드 초기 함수**********//
 	public void initRound(Players player1, Players player2)
 	{
-		System.out.println("기본배팅을 해주십시오.");
-		player1.basicBetting();
-		player2.basicBetting();
-		accBetchips(player1,player2);
+		if(same==0)
+		{	
+			System.out.println("기본배팅을 해주십시오.");
+			player1.basicBetting();
+			player2.basicBetting();
+			accBetchips(player1,player2);
+		}
+		else
+			same=0;
 	}
 	
 	//**********플레이어 칩누적함수**********//
@@ -212,6 +218,7 @@ public class Dealer  {
 			else
 			{
 				System.out.printf("두 플레이어의 카드가 동일하므로 배팅된 칩들을 유지합니다.\n");
+				same++;
 			}
 		}
 		System.out.printf("[ P1의 칩수  %d, P2의 칩수  %d ]\n"
@@ -230,4 +237,22 @@ public class Dealer  {
 		return endornot;
 	}
 	
+	//**********패했는지 확인함수**********//
+	public int checkDie(Players player1,Players player2)
+	{
+		if(player1.getChips()<=0)
+		{
+			System.out.printf("%d플레이어가 칩을 모두 소진하였습니다. %d플레이어의 승리입니다."
+					, player1.getId(),player2.getId());
+			return 1;
+		}
+		else if(player1.getChips()<=0)
+		{
+			System.out.printf("%d플레이어가 칩을 모두 소진하였습니다. %d플레이어의 승리입니다."
+					, player2.getId(),player1.getId());
+			return 1;
+		}
+		else
+			return 0;
+	}
 }

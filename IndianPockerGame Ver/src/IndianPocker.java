@@ -7,6 +7,8 @@ public class IndianPocker {
 		Players player1 = new Players(1);
 		Players player2 = new Players(2);
 		int stage=0;
+		int die=0;
+		
 		
 		System.out.println("-----------인디언 포커-----------");
 		System.out.println();
@@ -27,25 +29,24 @@ public class IndianPocker {
 					dealer.betting(player1, player2);			
 				else
 					break;
+				die=dealer.checkDie(player1,player2);
+				
+				if(die==1)
+					break;
+				
 				System.out.println();
 				if(dealer.EndorNot()==0)
 					dealer.betting(player2, player1);
 				else
 					break;
+				die=dealer.checkDie(player1,player2);
+				
+				if(die==1)
+					break;
 			}
+			if(die==1)
+				break;
 			
-			if(player1.getChips()==0)
-			{
-				System.out.printf("%d플레이어가 칩을 모두 소진하였습니다. %d플레이어의 승리입니다."
-						, player1.getId(),player2.getId());
-				break;
-			}
-			else if(player1.getChips()==0)
-			{
-				System.out.printf("%d플레이어가 칩을 모두 소진하였습니다. %d플레이어의 승리입니다."
-						, player2.getId(),player1.getId());
-				break;
-			}
 		}
 	}
 }

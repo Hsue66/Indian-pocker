@@ -97,6 +97,11 @@ public class Players {
 				System.out.printf("가진 칩 수보다  많습니다. 다시 입력해주십시오: ");
 				wrong++;
 			}
+			else if(betchip==0)
+			{
+				System.out.printf("0개를 배팅하실 수 없습니다. 다시 입력해주십시오: ");
+				wrong++;	
+			}
 		}while(wrong!=0);	
 		accchip = betchip+accchip;	// 칩 누적
 		chips=chips-betchip;	// 소유 칩에서 빼기
