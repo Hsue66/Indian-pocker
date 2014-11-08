@@ -246,7 +246,7 @@ public class Dealer  {
 					, player1.getId(),player2.getId());
 			return 1;
 		}
-		else if(player1.getChips()<=0)
+		else if(player2.getChips()<=0)
 		{
 			System.out.printf("%d플레이어가 칩을 모두 소진하였습니다. %d플레이어의 승리입니다."
 					, player2.getId(),player1.getId());
