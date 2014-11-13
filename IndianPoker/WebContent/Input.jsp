@@ -11,10 +11,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<FORM METHOD=GET ACTiON=GameInput>
+	 <FORM METHOD=GET ACTiON=GameInput>
 			값 : <INPUT TYPE=text name=num >
 			<INPUT TYPE = "hidden" name = id value= "<%=id%>">
-		<input type=submit value="전송">
+		<input type=submit value="전송"> 
 	</FORM>
 </body>
 </html>

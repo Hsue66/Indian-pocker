@@ -40,6 +40,7 @@ public class LoginCheck extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		String id = request.getParameter("id");
+		String num = request.getParameter("num");
 		if(id == null || id.trim().length() == 0)
 		{
 			response.sendRedirect("Error.html");
