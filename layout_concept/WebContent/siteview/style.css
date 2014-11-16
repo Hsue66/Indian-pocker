@@ -1,0 +1,87 @@
+@CHARSET "utf-8";
+
+.container {
+	background-color:#F0F0F0;
+	width:900px; 
+	margin:0 auto; 
+	padding:10px;
+}
+.header
+{ 
+	line-height: 50px;
+	background-color:#908886;
+	 height: 50px;
+}
+.my_id
+{
+	width:250px;
+	height:50;	
+	background-color:#d0d0d0;
+}
+
+.my_info
+{
+	line-height: 250px;
+	width:250px;
+	height:250px;
+	margin-top:-30px;
+	padding:0px;
+	background-color:#d0d0d0;
+}
+.my_card
+{
+	line-height: 250px;
+	width:250px;
+	height:300px;
+	margin:0px;
+	padding:0px;
+	background-color:#d0d0d0;
+}
+.center
+{
+	line-height: 500px;
+	background-color:#4f4f4f;
+	margin-top:-560px;
+	margin-left:250px;
+	padding:0px;
+	width:400px;
+	height:540px;
+}
+.other_id
+{
+	background-color:#d0d0d0;
+	width:250px;
+	margin-top:-50px;
+	margin-left:650px;
+	height:50;
+		
+}
+.other_card
+{
+	line-height: 200px;
+	background-color:#d0d0d0;
+	float:right;
+	margin-top:-540px;
+	margin-left:0px;
+	padding:0px;
+	width:250px;
+	height:300px;
+}
+.other_info
+{
+	line-height: 200px;
+	background-color:#d0d0d0;
+	float:right;
+	margin-top:-250px;
+	margin-left:0px;
+	padding:0px;
+	width:250px;
+	height:250px;
+}
+
+.footer
+{
+	background-color:#252525;
+	clear:both;
+	height:100px;
+}
