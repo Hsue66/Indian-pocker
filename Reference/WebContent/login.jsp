@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="KSC5601"%>
 
 <jsp:useBean id="player" class="tom.PlayerInfo" scope="session"/>
-<!-- <jsp:setProperty name="player" property="*"/> 사용시 7번줄 선언 불필요
+<!-- <jsp:setProperty name="player" property="*"/> 사용시 8번줄 선언 불필요
 	 setProperty 사용시 param=""으로 값 저장 -->
 
 <% 
@@ -10,6 +10,7 @@ String userid= request.getParameter("userid");		// 입력받은 닉네임을 string에 저
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>	 Login  </title>	
 </head>
 <body>

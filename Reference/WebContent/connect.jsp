@@ -7,9 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>~~~~~~~~~~~~~</title>
 </head>
-<body>					<%-- name은 servlet에서의 변수명, value는 넘겨줄 값 player.getUserid() --%>
-	<jsp:forward page = "GameServer">						
-		<jsp:param name="userid" value="<%=player.getUserid()%>"/>		
-		</jsp:forward>
-</body>					<%-- 닉네임 정보를 가지고 GameServer 접속 --%>
+<body>					<%-- name은 servlet에서의 변수명, value는 넘겨줄 값 --%>
+	<FORM METHOD=GET ACTiON="GameServer" >	
+		<INPUT TYPE="hidden" name="userid" value="<%=player.getUserid()%>">	
+		<input type="submit" value="gogo">				
+	</FORM>
+</body>					<%-- 닉네임정보와 칩들을 가지고 Game 입장 --%>
 </html>
