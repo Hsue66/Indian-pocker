@@ -149,8 +149,6 @@ public class GameServer extends HttpServlet {
 			}
 		
 		
-		
-		
 		out.println("1번 플레이어가 베팅한 칩: "+player1.getBetchip()+"<br>");
 		out.println("1번 플레이어의 남은칩: "+player1.getChips()+"<br>");
 		out.println("1번 플레이어의 누적 칩 : "+player1.getAccchip()+"<br>");
@@ -158,12 +156,7 @@ public class GameServer extends HttpServlet {
 		out.println("2번 플레이어의 남은칩 : "+player2.getChips()+"<br>");
 		out.println("2번 플레이어의 누적 칩 : "+player2.getAccchip()+"<br>");
 		
-		
-		
-		
-		
-		
-				
+			
 				
 	out.println("<html><head>");							// 2초마다 GameServer 새로고침
 	out.println("<meta http-equiv='refresh'content = '10; url=GameServer'>");
