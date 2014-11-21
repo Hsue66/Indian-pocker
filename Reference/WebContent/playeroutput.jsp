@@ -66,7 +66,6 @@
 		<div class="bet" align="center">
 			<FORM METHOD=GET ACTiON="GameServer">
 				<!-- submit 누를시 이동할 페이지 -->
-
 				베팅할 칩: <INPUT TYPE="text" name="betchip"> <INPUT
 					TYPE="hidden" name="checkid" value="<%=player.getUserid()%>">
 				<input type="submit" value="베팅">
