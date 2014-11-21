@@ -96,17 +96,29 @@ public class GameServer extends HttpServlet {
 	
 		
 		if(temp3!=null) {				// '상대베팅확인'을 누르고 왔다면 !!
-			if(userOrder==2 && temp2.equals(saveid[1])) {		// 현재순서는 2번 플레이어이고 그놈 id까지 맞다면
+		////***************************************************************************////
+			if(userOrder==1 && temp2.equals(saveid[0])) {		// 내가 1번인데  내순서인경우
+				request.setAttribute("myleftchip", player1.getChips());	// 나의 남은칩과
+				request.setAttribute("enemyleftchip", player2.getChips());	// 상대방의 남은칩과
+				request.setAttribute("enemybetchip", player2.getBetchip());	// 상대방이 베팅한 칩 정보를 들고
+				request.getRequestDispatcher("playeroutput.jsp").forward(request, response);	// 다시 jsp로 이동
+			}
+			else if(userOrder==2 && temp2.equals(saveid[0])) {		// 내가 1번인데  상대순서인경우
+				request.setAttribute("myleftchip", player1.getChips());	// 나의 남은칩과
+				request.setAttribute("enemyleftchip", player2.getChips());	// 상대방의 남은칩과
+				request.setAttribute("enemybetchip", player2.getBetchip());	// 상대방이 베팅한 칩 정보를 들고
+				request.getRequestDispatcher("playeroutput.jsp").forward(request, response);	// 다시 jsp로 이동
+			}
+			else if(userOrder==2 && temp2.equals(saveid[1])){		// 내가 2번인데  내순서인경우
 				request.setAttribute("myleftchip", player2.getChips());	// 나의 남은칩과
 				request.setAttribute("enemyleftchip", player1.getChips());	// 상대방의 남은칩과
 				request.setAttribute("enemybetchip", player1.getBetchip());	// 상대방이 베팅한 칩 정보를 들고
 				request.getRequestDispatcher("playeroutput.jsp").forward(request, response);	// 다시 jsp로 이동
 			}
-			////***************************************************************************////
-			else {		// 그 다음 사람
-				request.setAttribute("myleftchip", player1.getChips());	// 나의 남은칩과
-				request.setAttribute("enemyleftchip", player2.getChips());	// 상대방의 남은칩과
-				request.setAttribute("enemybetchip", player2.getBetchip());	// 상대방이 베팅한 칩 정보를 들고
+			else if(userOrder==1 && temp2.equals(saveid[1])){		// 내가 2번인데  상대순서인경우
+				request.setAttribute("myleftchip", player2.getChips());	// 나의 남은칩과
+				request.setAttribute("enemyleftchip", player1.getChips());	// 상대방의 남은칩과
+				request.setAttribute("enemybetchip", player1.getBetchip());	// 상대방이 베팅한 칩 정보를 들고
 				request.getRequestDispatcher("playeroutput.jsp").forward(request, response);	// 다시 jsp로 이동
 			}
 			////***************************************************************************////
@@ -132,6 +144,13 @@ public class GameServer extends HttpServlet {
 					System.out.printf("누적 칩 %d\n", player1.getAccchip());
 					userOrder++;					// 1번플레이어가 제대로 베팅하면 1번플레이어는 서블릿에서 멈추고 순서 넘김
 					
+					
+				////***************************************************************************////
+					request.setAttribute("myleftchip", player1.getChips());	// 나의 남은칩과
+					request.setAttribute("enemyleftchip", player2.getChips());	// 상대방의 남은칩과
+					request.setAttribute("enemybetchip", player2.getBetchip());	// 상대방이 베팅한 칩 정보를 들고
+					request.getRequestDispatcher("playeroutput.jsp").forward(request, response);	// 다시 jsp로 이동
+				////***************************************************************************////
 				}
 				
 			}
@@ -151,23 +170,20 @@ public class GameServer extends HttpServlet {
 					System.out.printf("플레이어가 베팅한 칩 %d\n", player2.getBetchip());
 					System.out.printf("플레이어의 남은칩 %d\n", player2.getChips());
 					System.out.printf("누적 칩 %d\n", player2.getAccchip());
-					//userOrder++;				// 2번 플레이어도 서블릿에서 멈추고  &&&&&&&&& 일단 여기서 끝!!&&&&&&
+					userOrder--;				// 2번 플레이어도 서블릿에서 멈추고  &&&&&&&&& 일단 여기서 끝!!&&&&&&
+					
+				////***************************************************************************////
+					request.setAttribute("myleftchip", player2.getChips());	// 나의 남은칩과
+					request.setAttribute("enemyleftchip", player1.getChips());	// 상대방의 남은칩과
+					request.setAttribute("enemybetchip", player1.getBetchip());	// 상대방이 베팅한 칩 정보를 들고
 					request.getRequestDispatcher("playeroutput.jsp").forward(request, response);	// 다시 jsp로 이동
+				////***************************************************************************////
 				}
 			}
 			else out.println("<script type='text/javascript'>"	// 본인 차례가 아닐떄
 					+ "alert('당신차례가아냐');history.back();</script>");
 			}
 		
-		
-		out.println("1번 플레이어가 베팅한 칩: "+player1.getBetchip()+"<br>");
-		out.println("1번 플레이어의 남은칩: "+player1.getChips()+"<br>");
-		out.println("1번 플레이어의 누적 칩 : "+player1.getAccchip()+"<br>");
-		out.println("2번 플레이어가 베팅한 칩 : "+player2.getBetchip()+"<br>");
-		out.println("2번 플레이어의 남은칩 : "+player2.getChips()+"<br>");
-		out.println("2번 플레이어의 누적 칩 : "+player2.getAccchip()+"<br>");
-		
-			
 				
 	out.println("<html><head>");							// 2초마다 GameServer 새로고침
 	out.println("<meta http-equiv='refresh'content = '10; url=GameServer'>");
