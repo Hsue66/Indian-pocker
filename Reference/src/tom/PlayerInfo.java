@@ -6,6 +6,29 @@ public class PlayerInfo {
 	private String userid;
 	private Integer usercard;
 	private Integer betchip;
+	//**********************//
+	private Integer userorder;
+	private Integer useraccchips;
+	
+	public Integer getUseraccchips() 
+	{
+		return useraccchips;
+	}
+	
+	public void setUseraccchips(Integer useraccchips) 
+	{
+		this.useraccchips = useraccchips;
+	}
+	
+	public void setUserorder(Integer userorder)
+	{
+		this.userorder = userorder;
+	}
+	public Integer getUserorder()
+	{
+		return userorder;
+	}
+	//**********************//
 	
 	public void setUserid(String userid)
 	{
