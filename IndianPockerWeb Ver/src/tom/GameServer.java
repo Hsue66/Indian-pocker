@@ -227,106 +227,109 @@ public class GameServer extends HttpServlet {
 		}
 
 		// 배팅을 한 경우 //
-		if(temp!=null && temp2!=null)
+		if(temp2!=null)
 		{	
-			if(userOrder==1 && temp2.equals(saveid[0]))		// 1번 순서고 id까지 맞으면
-			{	
-				player1.setBetchip(temp);					// 베팅한 값을 int로 변환
-				int checkbetting = player1.betChips();		// 베팅 가능 여부를 확인 (betChips함수 참고)
+			if(temp1!=null)
+			{
+				if(userOrder==1 && temp2.equals(saveid[0]))		// 1번 순서고 id까지 맞으면
+				{	
+					player1.setBetchip(temp);					// 베팅한 값을 int로 변환
+					int checkbetting = player1.betChips();		// 베팅 가능 여부를 확인 (betChips함수 참고)
 				
-				// 잘못배팅한 경우 - 딜러가 체크해주는 경우  //
-				if(player1.getAccchip()<player2.getAccchip() && checkbetting!=1 && checkbetting!=2)	
-				{
-					out.println("<script type='text/javascript'>"
-							+ "alert('상대방의 누적된 칩수와 같거나 크게 배팅해야합니다.\n 다시 입력해주세요');history.back();</script>");
-					player1.wrongBetchips(); 				// 잘못 배팅했으므로 칩 원상복귀
-				}
-				
-				else // -스스로 바보같이 배팅했는지 체크
-				{
-					if(checkbetting==1)				// 가진 것보다 많이 배팅한 경우 
+					// 잘못배팅한 경우 - 딜러가 체크해주는 경우  //
+					if(player1.getAccchip()<player2.getAccchip() && checkbetting!=1 && checkbetting!=2)	
 					{
 						out.println("<script type='text/javascript'>"
-							+ "alert('가진 칩 수보다  많습니다.\n 다시 입력해주세요');history.back();</script>");
+						+ "alert('상대방의 누적된 칩수와 같거나 크게 배팅해야합니다.\n 다시 입력해주세요');history.back();</script>");
+						player1.wrongBetchips(); 				// 잘못 배팅했으므로 칩 원상복귀
 					}
-					else if(checkbetting==2) 		// 배팅 포기한 경우 
+				
+					else // -스스로 바보같이 배팅했는지 체크
 					{
-						player1.changeLose(0);						// 라운드 포기 표시하기
-						RoundResult(userOrder);						// 라운드 결과 확인 함수	
-						
-						losemsg = userOrder +" 플레이어가 포기하였습니다.";
-						winmsg = userOrder+1 +" 플레이어가 승리하였습니다.";
-						showThings(request,response,0);				// 상태 메세지들 출력
-					}
-					else if(checkbetting==3) 		// 배팅한 경우 
-					{
-						System.out.printf("1 플레이어가 베팅한 칩 %d\n", player1.getBetchip());
-						System.out.printf("1 플레이어의 남은칩 %d\n", player1.getChips());
-						System.out.printf("1 누적 칩 %d\n", player1.getAccchip());
-						
-						userOrder++;	// 플레이어 순서 변경
-						
-						if(dealer.checkSame(player1, player2)!=0)	// 배팅된 칩이 같은 개수인 경우
+						if(checkbetting==1)				// 가진 것보다 많이 배팅한 경우 
 						{
-							RoundResult(userOrder);					// 라운드 결과 확인 함수
-							msg = "같은수를 배팅하셨습니다.";
+							out.println("<script type='text/javascript'>"
+							+ "alert('가진 칩 수보다  많습니다.\n 다시 입력해주세요');history.back();</script>");
 						}
-						showThings(request,response,0);				// 상태 메세지들 출력
+						else if(checkbetting==2) 		// 배팅 포기한 경우 
+						{
+							player1.changeLose(0);						// 라운드 포기 표시하기
+							RoundResult(userOrder);						// 라운드 결과 확인 함수	
+						
+							losemsg = userOrder +" 플레이어가 포기하였습니다.";
+							winmsg = userOrder+1 +" 플레이어가 승리하였습니다.";
+							showThings(request,response,0);				// 상태 메세지들 출력
+						}
+						else if(checkbetting==3) 		// 배팅한 경우 
+						{
+							System.out.printf("1 플레이어가 베팅한 칩 %d\n", player1.getBetchip());
+							System.out.printf("1 플레이어의 남은칩 %d\n", player1.getChips());
+							System.out.printf("1 누적 칩 %d\n", player1.getAccchip());
+						
+							userOrder++;	// 플레이어 순서 변경
+						
+							if(dealer.checkSame(player1, player2)!=0)	// 배팅된 칩이 같은 개수인 경우
+							{
+								RoundResult(userOrder);					// 라운드 결과 확인 함수
+								msg = "같은수를 배팅하셨습니다.";
+							}
+							showThings(request,response,0);				// 상태 메세지들 출력
+						}
 					}
 				}
-			}
 			
-			else if(userOrder==2 && temp2.equals(saveid[1]))	// 2번 순서고 id까지 맞으면
-			{	
-				player2.setBetchip(temp);						// 베팅한 값을 int로 변환
-				int checkbetting = player2.betChips();			// 베팅 가능 여부를 확인 (betChips함수 참고)
+				else if(userOrder==2 && temp2.equals(saveid[1]))	// 2번 순서고 id까지 맞으면
+				{	
+					player2.setBetchip(temp);						// 베팅한 값을 int로 변환
+					int checkbetting = player2.betChips();			// 베팅 가능 여부를 확인 (betChips함수 참고)
 				
-				// 잘못배팅한 경우 - 딜러가 체크해주는 경우  //
-				if(player2.getAccchip()<player1.getAccchip() && checkbetting!=1 && checkbetting!=2)
-				{
-					out.println("<script type='text/javascript'>"
-							+ "alert('상대방의 누적된 칩수와 같거나 크게 배팅해야합니다.\n 다시 입력해주세요');history.back();</script>");
-					player2.wrongBetchips(); 				// 잘못 배팅했으므로 칩 원상복귀
-				}
-				
-				else // -스스로 바보같이 배팅안했는지 체크
-				{
-					if(checkbetting==1) 			// 가진 것보다 많이 배팅한 경우 
+					// 잘못배팅한 경우 - 딜러가 체크해주는 경우  //
+					if(player2.getAccchip()<player1.getAccchip() && checkbetting!=1 && checkbetting!=2)
 					{
 						out.println("<script type='text/javascript'>"
-							+ "alert('가진 칩 수보다  많습니다.\n 다시 입력해주세요');history.back();</script>");
+						+ "alert('상대방의 누적된 칩수와 같거나 크게 배팅해야합니다.\n 다시 입력해주세요');history.back();</script>");
+						player2.wrongBetchips(); 				// 잘못 배팅했으므로 칩 원상복귀
 					}
-					else if(checkbetting==2) 		// 배팅 포기한 경우 
+				
+					else // -스스로 바보같이 배팅안했는지 체크
 					{
-						player2.changeLose(0);						// 라운드 포기 표시하기
-						RoundResult(userOrder);						// 라운드 결과 확인 함수
-						
-						losemsg = userOrder+" 플레이어가 포기하였습니다.";
-						winmsg = userOrder-1 +" 플레이어가 승리하였습니다.";
-						showThings(request,response,0);				// 상태 메세지들 출력
-					}
-					else if(checkbetting==3) 		// 배팅한 경우  
-					{
-						System.out.printf("2 플레이어가 베팅한 칩 %d\n", player2.getBetchip());
-						System.out.printf("2 플레이어의 남은칩 %d\n", player2.getChips());
-						System.out.printf("2 누적 칩 %d\n", player2.getAccchip());
-						
-						userOrder--;	// 플레이어 순서 변경
-						
-						if(dealer.checkSame(player1, player2)!=0)	// 배팅된 칩이 같은 개수인 경우
+						if(checkbetting==1) 			// 가진 것보다 많이 배팅한 경우 
 						{
-							RoundResult(userOrder);					// 라운드 결과 확인 함수
-							msg = "같은수를 배팅하셨습니다.";
+							out.println("<script type='text/javascript'>"
+							+ "alert('가진 칩 수보다  많습니다.\n 다시 입력해주세요');history.back();</script>");
 						}
-						showThings(request,response,1);				// 상태 메세지들 출력
+						else if(checkbetting==2) 		// 배팅 포기한 경우 
+						{
+							player2.changeLose(0);						// 라운드 포기 표시하기
+							RoundResult(userOrder);						// 라운드 결과 확인 함수
+						
+							losemsg = userOrder+" 플레이어가 포기하였습니다.";
+							winmsg = userOrder-1 +" 플레이어가 승리하였습니다.";
+							showThings(request,response,0);				// 상태 메세지들 출력
+						}
+						else if(checkbetting==3) 		// 배팅한 경우  
+						{
+							System.out.printf("2 플레이어가 베팅한 칩 %d\n", player2.getBetchip());
+							System.out.printf("2 플레이어의 남은칩 %d\n", player2.getChips());
+							System.out.printf("2 누적 칩 %d\n", player2.getAccchip());
+						
+							userOrder--;	// 플레이어 순서 변경
+						
+							if(dealer.checkSame(player1, player2)!=0)	// 배팅된 칩이 같은 개수인 경우
+							{
+								RoundResult(userOrder);					// 라운드 결과 확인 함수
+								msg = "같은수를 배팅하셨습니다.";
+							}
+							showThings(request,response,1);				// 상태 메세지들 출력
+						}
 					}
 				}
-			}
-			
-			else 	// 본인 차례가 아닐떄
-				out.println("<script type='text/javascript'>"	
+				else out.println("<script type='text/javascript'>"	// 본인 차례가 아닐떄	
 					+ "alert('당신차례가아냐');history.back();</script>");
 			}
+			else out.println("<script type='text/javascript'>"	// 입력값 없이 베팅할 때	
+					+ "alert('입력값이 없습니다');history.back();</script>");
+		}
 
 				
 	out.println("<html><head>");							// 3초마다 GameServer 새로고침

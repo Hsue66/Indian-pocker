@@ -1,0 +1,105 @@
+@CHARSET "utf-8";
+
+html{
+	background:url(img/bg.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-mox-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;	
+}
+
+.container {
+	width:900px; 
+	margin:0 auto; 
+	padding:10px;
+}
+
+.my_id
+{
+	margin-top:50px;
+	width:250px;
+	height:50;	
+	background-color:#d0d0d0;
+}
+
+.header
+{ 
+		margin-top:-110px;
+	background-image:url("./img/h.png");
+	background-repeat: no-repeat;
+	background-size:400px;
+	background-position: 50% 0%;
+	 height: 150px;
+}
+
+.other_id
+{
+	background-color:#d0d0d0;
+	width:250px;
+	margin-top:-50px;
+	margin-left:650px;
+	height:50;
+}
+
+.my_info
+{
+	line-height: 250px;
+	width:250px;
+	height:250px;
+	margin-top:-30px;
+	padding:0px;
+	background-color:#d0d0d0;
+}
+.my_card
+{
+	line-height: 250px;
+	width:250px;
+	height:300px;
+	margin:0px;
+	padding:0px;
+	background-color:#d0d0d0;
+}
+.state
+{
+	line-height: 40px;
+	background-color:#4f4f4f;
+	margin-top:-540px;
+	margin-left:250px;
+	padding:0px;
+	width:400px;
+	height:400px;
+}
+.bet
+{
+	line-height: 100px;
+	background-color:#ff8080;
+	margin-top:-25px;
+	margin-left:250px;
+	padding:0px;
+	width:400px;
+	height:160px;
+}
+
+.other_card
+{
+	line-height: 200px;
+	background-color:#d0d0d0;
+	float:right;
+	margin-top:-540px;
+	margin-left:0px;
+	padding:0px;
+	width:250px;
+	height:300px;
+}
+.other_info
+{
+	line-height: 200px;
+	background-color:#d0d0d0;
+	float:right;
+	margin-top:-250px;
+	margin-left:0px;
+	padding:0px;
+	width:250px;
+	height:250px;
+}
+
