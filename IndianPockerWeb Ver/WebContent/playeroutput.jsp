@@ -9,6 +9,9 @@
 	String penalty = (String)request.getAttribute("penalty");
 	String open = (String)request.getAttribute("open");
 
+	// 게임 종료 //
+	String gameEndFlag = (String)request.getAttribute("gameEndFlag");
+	
 	// 내 정보  //
 	Integer mycard = (Integer)request.getAttribute("mycard");
 	Integer myleftchip = (Integer)request.getAttribute("myleftchip");
@@ -67,7 +70,7 @@
 			
 			<!-- 내 카드 출력 부분 -->
 			<div class = "my_card" align="center">
-			<% if(open==null) { %>
+			<%if(open==null) { %>
 				<h1>MY CARD</h1>
 				<%}else if(open.equals("open")){ %>
 				<h1><jsp:getProperty name="player" property="usercard" /></h1>
@@ -95,20 +98,45 @@
 
 			<!-- 배팅창 부분 -->
 			<div class="bet" align="center">
-				<!-- 배팅 폼 -->
+			<!-- 배팅 폼 -->
+			<% if(gameEndFlag == null || gameEndFlag.equals("false"))	// gameEndFlag의값이 true가아니면 배팅창
+			{%>
+				<% if(open==null) { %>
+				<!-- submit 누를시 이동할 페이지 -->
 				<FORM METHOD=GET ACTiON="GameServer">
-					<!-- submit 누를시 이동할 페이지 -->
 					베팅할 칩: <INPUT TYPE="text" name="betchip"> <INPUT
 						TYPE="hidden" name="checkid" value="<%=player.getUserid()%>">
 					<input type="submit" value="베팅">
 				</FORM>
+				<%}else if(open.equals("open"));
+			   	else {%>
+				<FORM METHOD=GET ACTiON="GameServer">
+					베팅할 칩: <INPUT TYPE="text" name="betchip"> <INPUT
+						TYPE="hidden" name="checkid" value="<%=player.getUserid()%>">
+					<input type="submit" value="베팅">
+				</FORM>
+				<%}%>
 				<!-- 배팅확인 폼 -->
 				<FORM METHOD=GET ACTiON="GameServer">
 					<INPUT TYPE="hidden" name="checkenemybet" value="kk"> <INPUT
 						TYPE="hidden" name="checkid" value="<%=player.getUserid()%>">
 					<input type="submit" value="상대베팅확인">
 				</FORM>
-			</div>
+				<%if(open==null){}		
+				else if(open.equals("open")){ %>
+				<FORM METHOD=GET ACTiON="GameServer">
+					<INPUT TYPE="hidden" name="nextround" value="kk"> <INPUT
+						TYPE="hidden" name="checkid" value="<%=player.getUserid()%>">
+					<input type="submit" value="다음라운드">
+				</FORM>
+				<%}%>
+			<%} else if(gameEndFlag.equals("true")){%>				<!--  gameEndFlag의값이 true일때 배팅창을 없엔다. -->	
+				<FORM METHOD=GET ACTION="login.html">
+					<input type="submit" value="초기화면으로">
+				</FORM>			
+			<%}%>
+
+		</div>
 	
 			<!-- 상대 카드 출력 부분 -->
 			<div class="other_card" align="center">

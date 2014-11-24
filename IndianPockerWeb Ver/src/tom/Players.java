@@ -92,11 +92,11 @@ public class Players {
 		chips=chips-10;
 	}
 	
-	//%%%%%%%%%% 칩배팅함수 %%%%%%%%%%//
-	public int betChips()	// 돈을 배팅하는 기능
+	//%%%%%%%%%% 칩베팅함수 %%%%%%%%%%//
+	public int betChips()	// 돈을 베팅하는 기능
 	{
-		if(betchip>chips) return 1;		// 칩을 과하게 배팅 했을 경우
-		else if(betchip==0)	return 2;	// 베팅 포기했을 경우
+		if(betchip>chips) return 1;		// 본인칩보다 많이 베팅 했을 경우
+		else if(betchip==0)	return 2;	// 베팅을 포기했을 경우
 		else {							// 정상적인 베팅일 경우
 			accchip = betchip+accchip;	// 칩 누적
 			chips=chips-betchip;		// 소유 칩에서 빼기
@@ -104,14 +104,14 @@ public class Players {
 		}
 	}
 	
-	//**********배팅 수정 함수**********//
+	//**********베팅 수정 함수**********//
 	public void wrongBetchips()
 	{
 		accchip = accchip-betchip;	// 칩 원상복귀
 		chips=chips+betchip;
 	}
 	
-	//**********제대로 배팅했을때  함수**********//
+	//**********제대로 베했을때  함수**********//
 	public void rightBetchips()
 	{
 		System.out.printf("%d개 칩을 배팅했습니다.누적 %d \n",betchip,accchip);

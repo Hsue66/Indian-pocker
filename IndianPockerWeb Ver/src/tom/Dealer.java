@@ -45,7 +45,7 @@ public class Dealer  {
 					if(cardDeck[i]==2)
 						overlap++;	// 겹칠 경우
 					else
-						cardDeck[i]=cardDeck[i]+1;
+						cardDeck[i]=cardDeck[i]+1;	// 해당카드 뽑힌 횟수증가
 				}
 			}
 		}while(overlap!=0);	//겹칠경우 다시 뽑기
@@ -61,15 +61,14 @@ public class Dealer  {
 		card1=pickCard();
 		card2=pickCard();
 		
-		System.out.printf("P%d의 카드는 %d입니다.\n",player2.getId(),card2);
-		System.out.printf("*P%d의 카드는 %d입니다.\n\n",player1.getId(),card1);
-		
+		System.out.printf("P%d의 카드는 %d입니다.\n",player1.getId(),card1);
+		System.out.printf("P%d의 카드는 %d입니다.\n\n",player2.getId(),card2);
 	}
 	
 	//**********라운드 초기 함수**********//
 	public void initRound(Players player1, Players player2)
 	{
-		if(same==0)			// 이전 라운드에서 다른 칩이었던 경우 
+		if(same==0)			// 이전 라운드에서 다른 카드였던 경우 
 		{	
 			System.out.println("기본배팅을 해드립니다");
 			player1.basicBetting();
@@ -78,18 +77,14 @@ public class Dealer  {
 			System.out.println("플레이어1 칩 :" +player1.getChips());
 			System.out.println("플레이어2 칩 :" +player2.getChips());
 		}
-		else				// 이전 라운드에서 같은 칩이었던 경우
+		else				// 이전 라운드에서 같은 카드였던 경우
 			same=0;
 	}
 	
 	//**********플레이어 칩누적함수**********//
 	public void accBetchips(Players player1, Players player2)
 	{
-		
 		total=player1.getAccchip()+player2.getAccchip();
-		System.out.printf("P1의누적칩  %d, P2의 누적칩  %d, 총 누적된 칩의 개수: %d\n\n"
-				,player1.getAccchip(),player2.getAccchip(),total);
-	
 	}
 	
 	//**********칩배팅 체크함수**********//
@@ -141,8 +136,7 @@ public class Dealer  {
 			do{
 				wrong=0;
 				System.out.printf("얼마를 배팅하시겠습니까? ");
-				nowP.betChips();
-				
+					
 				wrong=checkBet(nowP,nextP);
 				
 			}while(wrong!=0);
@@ -183,7 +177,7 @@ public class Dealer  {
 	//%%%%%%%%%% 라운드 체크 함수 %%%%%%%%%% //
 	public void checkRound(Players nowP, Players nextP, int Ncard)
 	{
-		tot = tot + nowP.getAccchip() + nextP.getAccchip();	 // 배팅 칩 합치기
+		tot = nowP.getAccchip() + nextP.getAccchip();	 // 배팅 칩 합치기
 		nowP.changeLose(1);		// 플레이어 포기 표시 지우기
 		
 		if(Ncard==10)			// 포기한 플레이어의 카드가 10인 경우
@@ -201,11 +195,10 @@ public class Dealer  {
 	//%%%%%%%%%% 같은 칩 배팅 일때 라운드 체크 함수 %%%%%%%%%% //
 	public void checkSamechipRound(Players player1, Players player2)
 	{
-		tot = tot + player1.getAccchip() + player2.getAccchip();// 배팅 칩 합치기
+		tot = player1.getAccchip() + player2.getAccchip();// 배팅 칩 합치기
 		
 		if(card1 > card2)		// 플레이어 1의 카드가 큰 경우
 		{
-			System.out.printf("%d 플레이어의 카드가 더 커서 승리했습니다.\n", player1.getId());
 			player1.increaseWin(tot);	// 1플레이어 칩 수 증가
 			player1.initBetting();		// 배팅 초기화
 			player2.initBetting();		// 배팅 초기화
@@ -213,7 +206,6 @@ public class Dealer  {
 		}
 		else if(card1 < card2)	// 플레이어 2의 카드가 큰 경우
 		{
-			System.out.printf("%d 플레이어의 카드가 더 커서 승리했습니다.\n", player2.getId());
 			player2.increaseWin(tot);	// 1플레이어 칩 수 증가
 			player1.initBetting();		// 배팅 초기화
 			player2.initBetting();		// 배팅 초기화
@@ -222,6 +214,7 @@ public class Dealer  {
 		else					// 카드가 같은 경우
 		{
 			System.out.printf("두 플레이어의 카드가 동일하므로 배팅된 칩들을 유지합니다.\n");
+			System.out.printf("P1의 누적 칩: %d\nP2의 누적 칩: %d", player1.getAccchip(), player2.getAccchip());
 			same++;		// 카드 같았다고 표시
 		}
 	}
