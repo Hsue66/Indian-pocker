@@ -1,19 +1,36 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">	<!-- ¿©±â°¡ ½ÃÀÛ -->
 <title> Welcome </title>
 </head>
+
+<style>
+body 
+{
+	margin:0 auto;
+	background:black;
+	background-attachment:fixed;
+}
+</style>
+
 <body>
 
+<div align="center" style="border: height: 100px; padding: 700px 0px 0px 0px;
+ margin:0 auto; background-image:url(login.jpg); background-repeat:no-repeat;
+background-position: 50% 50%; background-size: contain; " >
+</div>
 
-<h1>»ç¿ëÇÏ½Ç ´Ğ³×ÀÓÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.</h1>
-	<FORM METHOD=POST ACTiON="login.jsp" >				<!-- submit ´©¸¦½Ã ÀÌµ¿ÇÒ ÆäÀÌÁö -->
-	
-	´Ğ³×ÀÓ : <INPUT TYPE="text" name="userid" size="15">	<!-- name = login.jsp·Î ³Ñ±æº¯¼ö-->
-	
-	<input type="submit" value="Á¢¼Ó">					<!-- submit¹öÆ° Ç¥½Ã³»¿ë="Á¢¼Ó" -->
+<div align="center" style="border: height: 100px; padding: 10px 0px 0px 0px;
+ margin:0 auto; " >
+
+
+<font color = "white" size="3px">ì‚¬ìš©í•˜ì‹¤ ë‹‰ë„¤ì„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.</font>	
+	<FORM METHOD=POST ACTiON="preLogin.jsp">
+	<INPUT TYPE="text" name="nickName" size="15">
+	<input type="submit" value="ì ‘ì†">
 	</FORM>
-	
+</div>
+
 </body>
 </html>
