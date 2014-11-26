@@ -13,56 +13,80 @@ html{
 	margin:0 auto; 
 	padding:10px;
 }
-
+.head {
+	width:900px;
+	height:130px;
+	margin-left:-10px;
+	background-image:url("./img/p.png");
+	background-repeat: no-repeat;
+	background-size:1000px;
+	background-position: -52% -20%;
+	padding:10px;
+}
 .my_id
 {
-	margin-top:50px;
+	color:#ffffff;
+	background-image:url("./img/n.png");
+	background-repeat: no-repeat;
+	background-size:270px;
+	margin-top:150px;
 	width:250px;
-	height:50;	
-	background-color:#d0d0d0;
+	height:150;	
 }
 
 .header
 { 
-		margin-top:-110px;
+	margin-top:-220px;
 	background-image:url("./img/h.png");
 	background-repeat: no-repeat;
 	background-size:400px;
 	background-position: 50% 0%;
-	 height: 150px;
+	height: 150px;
 }
 
 .other_id
 {
-	background-color:#d0d0d0;
+	color:#ffffff;
+	background-image:url("./img/n.png");
+	background-repeat: no-repeat;
+	background-size:270px;
+	background-position: -15% 0%;
 	width:250px;
-	margin-top:-50px;
+	margin-top:0px;
 	margin-left:650px;
-	height:50;
+	height:150;
 }
 
 .my_info
 {
+	background-image:url("./img/chip.png");
+	line-height: 200px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
 	line-height: 250px;
 	width:250px;
 	height:250px;
 	margin-top:-30px;
 	padding:0px;
-	background-color:#d0d0d0;
 }
 .my_card
 {
+	/*background-image:url("./img/bcard.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size:180px;*/
 	line-height: 250px;
 	width:250px;
 	height:300px;
-	margin:0px;
+	margin-top:50px;
 	padding:0px;
-	background-color:#d0d0d0;
 }
 .state
 {
-	line-height: 40px;
-	background-color:#4f4f4f;
+	color:#000000;
+	font-weight:bold;
+	font-size:15pt;
+	line-height: 50px;
 	margin-top:-540px;
 	margin-left:250px;
 	padding:0px;
@@ -82,8 +106,11 @@ html{
 
 .other_card
 {
+	/*background-image:url("./img/bcard.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size:180px;*/
 	line-height: 200px;
-	background-color:#d0d0d0;
 	float:right;
 	margin-top:-540px;
 	margin-left:0px;
@@ -93,8 +120,10 @@ html{
 }
 .other_info
 {
+	background-image:url("./img/chip.png");
 	line-height: 200px;
-	background-color:#d0d0d0;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
 	float:right;
 	margin-top:-250px;
 	margin-left:0px;
@@ -102,4 +131,6 @@ html{
 	width:250px;
 	height:250px;
 }
+
+
 

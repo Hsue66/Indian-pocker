@@ -73,6 +73,9 @@ public class GameServer extends HttpServlet {
 	{
 		if(flag==0)			// player1에서 출력하는 경우
 		{
+			request.setAttribute("mycard", Dealer.card1);				// 각종 정보들을 가지고
+			request.setAttribute("enemycard", Dealer.card2);
+			
 			request.setAttribute("myleftchip", player1.getChips());		// 나의 남은칩과
 			request.setAttribute("enemyleftchip", player2.getChips());	// 상대방의 남은칩과
 			request.setAttribute("enemybetchip", player2.getBetchip());	// 상대방이 베팅한 칩 정보를 들고
@@ -92,6 +95,9 @@ public class GameServer extends HttpServlet {
 		}
 		else				// player2에서 출력하는 경우
 		{
+			request.setAttribute("mycard", Dealer.card2);				// 각종 정보들을 가지고
+			request.setAttribute("enemycard", Dealer.card1);
+			
 			request.setAttribute("myleftchip", player2.getChips());		// 나의 남은칩과
 			request.setAttribute("enemyleftchip", player1.getChips());	// 상대방의 남은칩과
 			request.setAttribute("enemybetchip", player1.getBetchip());	// 상대방이 베팅한 칩 정보를 들고

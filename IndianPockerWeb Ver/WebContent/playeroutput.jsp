@@ -28,6 +28,8 @@
 	// 현재 플레이어 //
 	Integer nowplayer = (Integer)request.getAttribute("nowplayer");
 
+	String card="./img/"+mycard+".png";
+	
 	if(mycard!=null)%><jsp:setProperty name="player" property="usercard" value="<%=mycard%>"/>	
 <%	if(myleftchip!=null)%><jsp:setProperty name="player" property="userchip" value="<%=myleftchip%>"/>
 <%	if(mybetchip!=null)%><jsp:setProperty name="player" property="betchip" value="<%=mybetchip%>"/>
@@ -54,28 +56,36 @@
 	<body>
 		<div class = "container">
 
-			<!-- 내 아이디 출력 부분 -->
-			<div class = "my_id" align="center">	
-				<h2><jsp:getProperty name="player" property="userid"/></h2> 
-			</div>		
-		
-			<div class = "header" align="center" >
-				<h1></h1>
-			</div>
+			<div class= " head">
+				<!-- 내 아이디 출력 부분 -->
+				<div class = "my_id" align="center">	
+					<h2><jsp:getProperty name="player" property="userid"/></h2> 
+				</div>		
 			
-			<!-- 상대 아이디 출력 부분 -->
-			<div class = "other_id" align="center">
-				<h2><jsp:getProperty name="enemy" property="userid"/></h2> 
-			</div>
+				<div class = "header" align="center" >
+					<h1></h1>
+				</div>	
 			
+				<!-- 상대 아이디 출력 부분 -->
+				<div class = "other_id" align="center">
+					<h2><jsp:getProperty name="enemy" property="userid"/></h2> 
+				</div>
+			</div>	
+				
 			<!-- 내 카드 출력 부분 -->
 			<div class = "my_card" align="center">
 			<%if(open==null) { %>
-				<h1>MY CARD</h1>
-				<%}else if(open.equals("open")){ %>
-				<h1><jsp:getProperty name="player" property="usercard" /></h1>
+				<img src="./img/bcard.png" style="position:relative; left:4px; top:20px;"
+				 width="180px" height="270px">
+				<%}else if(open.equals("open")){ 
+					
+					%>
+				<img src="<%=card %>" style="position:relative; left:4px; top:20px;"
+				 width="180px" height="270px">
+
 				<%} else{%>
-				<h1>MY CARD</h1>
+				<img src="./img/bcard.png" style="position:relative; left:4px; top:20px;"
+				 width="180px" height="270px">
 				<%} %>
 			</div>
 			
@@ -138,9 +148,11 @@
 
 		</div>
 	
+			<% String card2="./img/"+enemycard+".png";%>
 			<!-- 상대 카드 출력 부분 -->
-			<div class="other_card" align="center">
-				<h1><jsp:getProperty name="enemy" property="usercard" /></h1>
+			<div class="other_card" align="center" >
+				<img src="<%=card2 %>" style="position:relative; left:4px; top:20px;"
+				 width="180px" height="270px">
 			</div>
 			
 			<!-- 상대 칩 출력 부분 -->
