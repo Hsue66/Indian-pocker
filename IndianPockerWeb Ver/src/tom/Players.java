@@ -51,7 +51,13 @@ public class Players {
 	//%%%%%%%%%% 배팅한 칩 수 받아오는 함수 %%%%%%%%%%//
 	public void setBetchip(String betinput) 
 	{
-		this.betchip = Integer.parseInt(betinput);
+		try{
+			this.betchip = Integer.parseInt(betinput);
+		}
+		catch(NumberFormatException e)
+		{
+			this.betchip = -1;
+		}
 	}
 	
 	//**********승리한 횟수함수**********//

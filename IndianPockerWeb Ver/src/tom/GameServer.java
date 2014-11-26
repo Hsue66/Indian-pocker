@@ -174,6 +174,12 @@ public class GameServer extends HttpServlet {
 	}
 
 	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException
+	{
+		doGet(request, response);
+		
+	}
 	//***************************************게임 진행 함수***************************************//
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException 
@@ -295,8 +301,12 @@ public class GameServer extends HttpServlet {
 				if(userOrder==1 && checkid.equals(saveid[0]))		// 현재순서는 1번 플레이어이고 id까지 맞다면 
 				{	
 					player1.setBetchip(betchip);					// 베팅한 값을 int로 변환
+					if(player1.getBetchip() < 0)
+					{
+						out.println("<script type='text/javascript'>"
+								+ "alert('숫자만 입력가능합니다.');history.back();</script>");
+					}
 					int checkbetting = player1.betChips();	// 베팅 가능 여부를 확인 (betChips함수 참고)
-				
 					// 잘못배팅한 경우 - 딜러가 체크해주는 경우  //
 					if(player1.getAccchip()<player2.getAccchip() && checkbetting!=1 && checkbetting!=2)	
 					{	
@@ -348,6 +358,11 @@ public class GameServer extends HttpServlet {
 				else if(userOrder==2 && checkid.equals(saveid[1]))	// 현재순서는 2번 플레이어이고 id까지 맞다면
 				{	
 					player2.setBetchip(betchip);						// 베팅한 값을 int로 변환
+					if(player2.getBetchip() < 0)
+					{
+						out.println("<script type='text/javascript'>"
+								+ "alert('숫자만 입력가능합니다.');history.back();</script>");
+					}
 					int checkbetting = player2.betChips();	// 베팅 가능 여부를 확인 (betChips함수 참고)
 					
 					// 잘못배팅한 경우 - 딜러가 체크해주는 경우  //
@@ -402,7 +417,7 @@ public class GameServer extends HttpServlet {
 		}
 		
 	out.println("<html><head>");							// 3초마다 GameServer 새로고침
-	out.println("<meta http-equiv='refresh'content = '3; url=GameServer'>");
+	out.println("<meta http-equiv='refresh'content = '2; url=GameServer'>");
 	out.println("</head><body>");							
 	if(rejoin==0) out.println("<h3>상대를 기다리는 중입니다....</h3>");
 	else out.println("<h3>다음 라운드 로딩중.....</h3>");
