@@ -30,6 +30,7 @@ public class GameServer extends HttpServlet {
 	int stage;
 	int die;
 	int rejoin;
+	int refreshcount;			// 상대베팅확인 횟수
 		
 	// Dealer 객체와 Player 객체 생성  // 
 	Dealer dealer = new Dealer();
@@ -46,6 +47,7 @@ public class GameServer extends HttpServlet {
 		die=0;
 		index = 0;
 		rejoin=0;
+		refreshcount=0;
 		
 		roundFlag=0;		// 라운드 시작을 구분하는 flag
 		playTurn=0;			// player의 순서를 결정하는 flag
@@ -194,6 +196,12 @@ public class GameServer extends HttpServlet {
 				saveid[index] = userid;		
 				index=(index+1) % 2;
 			}
+			if(saveid[1].equals(saveid[0])) {						// 중복된 아이디로 로그인할시
+				saveid[1] = "";									
+				index=(index+1) % 2;					
+				out.println("<script type='text/javascript'>"	// 돌려보냄		
+				+ "alert('사용중인 닉네임입니다.');history.back();</script>");	
+			}
 		}	
 		
 		if(saveid[1]!="") 			// 2명이 로그인했다면 게임 시작
@@ -209,6 +217,7 @@ public class GameServer extends HttpServlet {
 				loop=0;				// 반복제어 변수 초기화
 				gameclosed=0;		// 게임종료 상태를 게임 진행중상태로 변경
 				rejoin=0;			// 게임을 마친 인원수를 저장할 변수 초기화
+				refreshcount=0;		// 상대베팅확인 횟수 초기화
 				
 				messageInit();
 				
@@ -267,21 +276,37 @@ public class GameServer extends HttpServlet {
 		}
 		
 		// '상대베팅확인'을 누르고 온 경우 //
-		if(betrefresh!=null) {									
+		if(betrefresh!=null) {		
+						
 			if(userOrder==1 && checkid.equals(saveid[0])) 		// 1번유저가 현재 순서가 1번인데 '상대베팅확인' 눌렀을시
 				showThings(request, response, 0);				// 출력창 새로고침
-				
-			else if(userOrder==2 && checkid.equals(saveid[0])) 	// 1번유저가 현재 순서가 2번인데 '상대베팅확인' 눌렀을시
-				showThings(request, response, 0);				// 출력창 새로고침
+																
 			
-			else if(userOrder==1 && checkid.equals(saveid[1]))	// 2번유저가 현재 순서가 1번인데 '상대베팅확인' 눌렀을시
+			else if(userOrder==2 && checkid.equals(saveid[0])) {// 1번유저가 현재 순서가 2번인데 '상대베팅확인' 눌렀을시
+				refreshcount++;									// 상대베팅확인을 누른 횟수 누적
+				if(refreshcount>=30) {							// 30번확인시 상대가 나간것으로 판단
+					gameEndFlag = "true";						// 게임종료 플래그 설정
+					losemsg = saveid[1]+" 님이 게임에서 나가셨습니다.";	
+					winmsg = saveid[0]+" 님이 최종승리하셨습니다.";
+				}
+				showThings(request, response, 0);				// 출력창 새로고침
+			}
+						
+			else if(userOrder==1 && checkid.equals(saveid[1])) {// 2번유저가 현재 순서가 1번인데 '상대베팅확인' 눌렀을시
+				refreshcount++;									// 상대베팅확인을 누른 횟수 누적
+				if(refreshcount>=30) {							// 30번확인시 상대가 나간것으로 판단
+					gameEndFlag = "true";						// 게임종료 플래그 설정
+					losemsg = saveid[0]+" 님이 게임에서 나가셨습니다.";	
+					winmsg = saveid[1]+" 님이 최종승리하셨습니다.";
+				}
 				showThings(request, response,1);				// 출력창 새로고침
+			}
 			
 			else if(userOrder==2 && checkid.equals(saveid[1]))	// 2번유저가 현재 순서가 2번인데 '상대베팅확인' 눌렀을시
 				showThings(request, response,1);				// 출력창 새로고침
 			
 			if(gameEndFlag.equals("true"))
-			{
+			{	
 				init();	// 게임의 최종승자가 결정된경우 모든 변수를 초기화시켜 재시작을 할수있도록함
 			}
 		}
@@ -336,7 +361,8 @@ public class GameServer extends HttpServlet {
 						else if(checkbetting==2) {		// 배팅 포기한 경우 
 							player1.changeLose(0);						// 라운드 포기 표시하기
 							RoundResult(userOrder);						// 라운드 결과 확인 함수	
-							userOrder++;								// 플레이어 순서 변경			
+							userOrder++;								// 플레이어 순서 변경	
+							refreshcount=0;								// 상대베팅확인 횟수 초기화
 							gameclosed=1;								// '게임 종료'상태로 변경
 							losemsg = saveid[0]+"님이 포기하셨습니다.";
 							winmsg = saveid[1] +"님이 승리하였습니다.";
@@ -344,6 +370,7 @@ public class GameServer extends HttpServlet {
 						}
 						else if(checkbetting==3) {		// 정상적으로 배팅한 경우 
 							userOrder++;				// 플레이어 순서 변경
+							refreshcount=0;				// 상대베팅확인 횟수 초기화
 							
 							if(dealer.checkSame(player1, player2)!=0) {	// 배팅된 칩이 같은 개수인 경우
 								RoundResult(userOrder);					// 라운드 결과 확인 함수
@@ -394,6 +421,7 @@ public class GameServer extends HttpServlet {
 							player2.changeLose(0);						// 라운드 포기 표시하기
 							RoundResult(userOrder);						// 라운드 결과 확인 함수
 							userOrder--;								// 플레이어 순서 변경
+							refreshcount=0;								// 상대베팅확인 횟수 초기화
 							gameclosed=1;								// '게임 종료'상태로 변경
 							losemsg = saveid[1]+"님이 포기하였습니다.";
 							winmsg = saveid[0] +"님이 승리하였습니다.";
@@ -401,6 +429,7 @@ public class GameServer extends HttpServlet {
 						}
 						else if(checkbetting==3) { 		// 정상적으로 배팅한 경우
 							userOrder--;				// 플레이어 순서 변경
+							refreshcount=0;				// 상대베팅확인 횟수 초기화
 							
 							if(dealer.checkSame(player1, player2)!=0) {	// 배팅된 칩이 같은 개수인 경우
 								RoundResult(userOrder);					// 라운드 결과 확인 함수

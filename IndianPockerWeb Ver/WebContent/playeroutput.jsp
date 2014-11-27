@@ -114,29 +114,29 @@
 				<% if(open==null) { %>
 				<!-- submit 누를시 이동할 페이지 -->
 				<FORM METHOD=GET ACTiON="GameServer">
-					베팅할 칩: <INPUT TYPE="text" name="betchip"> <INPUT
-						TYPE="hidden" name="checkid" value="<%=player.getUserid()%>">
+					베팅할 칩: <INPUT TYPE="text" name="betchip"> 
+					<INPUT TYPE="hidden" name="checkid" value="<%=player.getUserid()%>">
 					<input type="submit" value="베팅">
 				</FORM>
 				<%}else if(open.equals("open"));
 			   	else {%>
 				<FORM METHOD=GET ACTiON="GameServer">
-					베팅할 칩: <INPUT TYPE="text" name="betchip"> <INPUT
-						TYPE="hidden" name="checkid" value="<%=player.getUserid()%>">
+					베팅할 칩: <INPUT TYPE="text" name="betchip"> 
+					<INPUT TYPE="hidden" name="checkid" value="<%=player.getUserid()%>">
 					<input type="submit" value="베팅">
 				</FORM>
 				<%}%>
 				<!-- 배팅확인 폼 -->
 				<FORM METHOD=GET ACTiON="GameServer">
-					<INPUT TYPE="hidden" name="checkenemybet" value="kk"> <INPUT
-						TYPE="hidden" name="checkid" value="<%=player.getUserid()%>">
+					<INPUT TYPE="hidden" name="checkenemybet" value="kk"> 
+					<INPUT TYPE="hidden" name="checkid" value="<%=player.getUserid()%>">
 					<input type="submit" value="상대베팅확인">
 				</FORM>
 				<%if(open==null){}		
 				else if(open.equals("open")){ %>
 				<FORM METHOD=GET ACTiON="GameServer">
-					<INPUT TYPE="hidden" name="nextround" value="kk"> <INPUT
-						TYPE="hidden" name="checkid" value="<%=player.getUserid()%>">
+					<INPUT TYPE="hidden" name="nextround" value="kk"> 
+					<INPUT TYPE="hidden" name="checkid" value="<%=player.getUserid()%>">
 					<input type="submit" value="다음라운드">
 				</FORM>
 				<%}%>
