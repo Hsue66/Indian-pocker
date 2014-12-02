@@ -21,9 +21,12 @@ String userid= request.getParameter("userid");		// 입력받은 닉네임을 string에 저
 		<jsp:getProperty name="player" property="userid"/> 님 게임에 입장하시겠습니까? <br><br>
 		<FORM METHOD=GET ACTiON="GameServer" >	
 		<INPUT TYPE="hidden" name="userid" value="<%=player.getUserid()%>">			<!--  id를 gameserver로 넘겨줌 -->
-		<input type="button" value="로그인창으로" onclick=location.href('login.html') > <!--  로그인창으로 이동시  -->
 		<input type="submit" value="게임방 입장">				
-	</FORM>
+		</FORM>
+		<FORM METHOD=GET ACTiON="login.html" >	
+		<input type="submit" value="로그인창으로">				
+		</FORM>
+		
 <%	}
 	else											// 닉네임을 입력하지 않았을 시 
 	{ 												// 경고창 출력

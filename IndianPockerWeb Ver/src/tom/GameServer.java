@@ -278,9 +278,9 @@ public class GameServer extends HttpServlet {
 		// '상대베팅확인'을 누르고 온 경우 //
 		if(betrefresh!=null) {		
 						
-			if(userOrder==1 && checkid.equals(saveid[0])) 		// 1번유저가 현재 순서가 1번인데 '상대베팅확인' 눌렀을시
-				showThings(request, response, 0);				// 출력창 새로고침
-																
+			if(userOrder==1 && checkid.equals(saveid[0])) 
+				showThings(request, response, 0);				// 1번유저가 현재 순서가 1번인데 '상대베팅확인' 눌렀을시
+																// 출력창 새로고침
 			
 			else if(userOrder==2 && checkid.equals(saveid[0])) {// 1번유저가 현재 순서가 2번인데 '상대베팅확인' 눌렀을시
 				refreshcount++;									// 상대베팅확인을 누른 횟수 누적
@@ -305,6 +305,8 @@ public class GameServer extends HttpServlet {
 			else if(userOrder==2 && checkid.equals(saveid[1]))	// 2번유저가 현재 순서가 2번인데 '상대베팅확인' 눌렀을시
 				showThings(request, response,1);				// 출력창 새로고침
 			
+			System.out.printf("상대베팅확인 횟수 : %d\n", refreshcount);
+			
 			if(gameEndFlag.equals("true"))
 			{	
 				init();	// 게임의 최종승자가 결정된경우 모든 변수를 초기화시켜 재시작을 할수있도록함
@@ -326,39 +328,33 @@ public class GameServer extends HttpServlet {
 				if(userOrder==1 && checkid.equals(saveid[0]))		// 현재순서는 1번 플레이어이고 id까지 맞다면 
 				{	
 					player1.setBetchip(betchip);					// 베팅한 값을 int로 변환
-					if(player1.getBetchip() < 0)
-					{
-						out.println("<script type='text/javascript'>"
-								+ "alert('숫자만 입력가능합니다.');history.back();</script>");
-					}
 					int checkbetting = player1.betChips();	// 베팅 가능 여부를 확인 (betChips함수 참고)
+					
 					// 잘못배팅한 경우 - 딜러가 체크해주는 경우  //
-					if(player1.getAccchip()<player2.getAccchip() && checkbetting!=1 && checkbetting!=2)	
+					if(player1.getAccchip()<player2.getAccchip() && checkbetting!=1 && checkbetting!=2 && checkbetting!=-1)	
 					{	
 						out.println("<script type='text/javascript'>"
 						+ "alert('상대방의 누적된 칩수와 같거나 크게 배팅해야합니다.');history.back();</script>");
 						player1.wrongBetchips(); 				// 잘못 배팅했으므로 칩 원상복귀
 					}
 					
-					else if(player1.getBetchip()>=player2.getChips()+player2.getAccchip() && checkbetting!=1 && checkbetting!=2) 
+					else if(player1.getBetchip()>=player2.getChips()+player2.getAccchip() && checkbetting!=1 && checkbetting!=2 && checkbetting!=-1) 
 					{	
 						out.println("<script type='text/javascript'>"
 						+ "alert('상대의 남은칩보다 더 베팅할 수 없습니다.');history.back();</script>");
 						player1.wrongBetchips(); 
 					}
-					else if(player1.getAccchip() > player2.getChips()+player2.getAccchip() && checkbetting!=1 && checkbetting!=2)
-					{
-						out.println("<script type='text/javascript'>"
-								+ "alert('상대의 남은칩보다 더 베팅할 수 없습니다.');history.back();</script>");
-								player1.wrongBetchips();
-					}
-					
+									
 					else {					// -스스로 바보같이 배팅했는지 체크
-						if(checkbetting==1)	{			// 보유칩보다 많이 배팅한 경우 다시 돌려보냄
+						if(checkbetting==-1) {				// 숫자입력이 아닐 경우 다시 돌려보냄 
+							out.println("<script type='text/javascript'>"
+							+ "alert('숫자만 입력가능합니다.');history.back();</script>");
+						}
+						else if(checkbetting==1) {			// 보유칩보다 많이 배팅한 경우 다시 돌려보냄
 							out.println("<script type='text/javascript'>"
 							+ "alert('내가 가진 칩 수보다 더 베팅할 수 없습니다.');history.back();</script>");
 						}
-						else if(checkbetting==2) {		// 배팅 포기한 경우 
+						else if(checkbetting==2) {			// 배팅 포기한 경우 
 							player1.changeLose(0);						// 라운드 포기 표시하기
 							RoundResult(userOrder);						// 라운드 결과 확인 함수	
 							userOrder++;								// 플레이어 순서 변경	
@@ -385,35 +381,29 @@ public class GameServer extends HttpServlet {
 				else if(userOrder==2 && checkid.equals(saveid[1]))	// 현재순서는 2번 플레이어이고 id까지 맞다면
 				{	
 					player2.setBetchip(betchip);						// 베팅한 값을 int로 변환
-					if(player2.getBetchip() < 0)
-					{
-						out.println("<script type='text/javascript'>"
-								+ "alert('숫자만 입력가능합니다.');history.back();</script>");
-					}
 					int checkbetting = player2.betChips();	// 베팅 가능 여부를 확인 (betChips함수 참고)
 					
 					// 잘못배팅한 경우 - 딜러가 체크해주는 경우  //
-					if(player2.getAccchip()<player1.getAccchip() && checkbetting!=1 && checkbetting!=2)
+					if(player2.getAccchip()<player1.getAccchip() && checkbetting!=1 && checkbetting!=2 && checkbetting!=-1)
 					{	
 						out.println("<script type='text/javascript'>"
-								+ "alert('상대방의 누적된 칩수와 같거나 크게 배팅해야합니다.');history.back();</script>");
+						+ "alert('상대방의 누적된 칩수와 같거나 크게 배팅해야합니다.');history.back();</script>");
 						player2.wrongBetchips(); 				// 잘못 배팅했으므로 칩 원상복귀
 					}
 					
-					else if(player2.getBetchip()>=player1.getChips()+player1.getAccchip() && checkbetting!=1 && checkbetting!=2) 
+					else if(player2.getBetchip()>=player1.getChips()+player1.getAccchip() && checkbetting!=1 && checkbetting!=2 && checkbetting!=-1) 
 					{	
 						out.println("<script type='text/javascript'>"
 						+ "alert('상대의 남은칩보다 더 베팅할 수 없습니다.');history.back();</script>");
 						player2.wrongBetchips(); 
 					}
-					else if(player2.getAccchip() > player1.getChips()+player1.getAccchip() && checkbetting!=1 && checkbetting!=2)
-					{
-						out.println("<script type='text/javascript'>"
-								+ "alert('상대의 남은칩보다 더 베팅할 수 없습니다.');history.back();</script>");
-								player2.wrongBetchips();
-					}
+					
 					else { 			// -스스로 바보같이 배팅안했는지 체크
-						if(checkbetting==1) {			// 보유칩보다 많이 배팅한 경우 다시 돌려보냄
+						if(checkbetting==-1) {
+							out.println("<script type='text/javascript'>"
+							+ "alert('숫자만 입력가능합니다.');history.back();</script>");
+						}
+						else if(checkbetting==1) {			// 보유칩보다 많이 배팅한 경우 다시 돌려보냄
 							out.println("<script type='text/javascript'>"
 							+ "alert('내가 가진 칩 수보다 더 베팅할 수 없습니다.');history.back();</script>");
 						}

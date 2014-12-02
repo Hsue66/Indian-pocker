@@ -101,7 +101,8 @@ public class Players {
 	//%%%%%%%%%% 칩베팅함수 %%%%%%%%%%//
 	public int betChips()	// 돈을 베팅하는 기능
 	{
-		if(betchip>chips) return 1;		// 본인칩보다 많이 베팅 했을 경우
+		if(betchip<0) return -1;		// 숫자베팅이 아닐 경우
+		else if(betchip>chips) return 1;// 본인칩보다 많이 베팅 했을 경우
 		else if(betchip==0)	return 2;	// 베팅을 포기했을 경우
 		else {							// 정상적인 베팅일 경우
 			accchip = betchip+accchip;	// 칩 누적
