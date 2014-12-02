@@ -1,36 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="KSC5601"%>
 
 <jsp:useBean id="player" class="tom.PlayerInfo" scope="session"/>
-<!-- <jsp:setProperty name="player" property="*"/> »ç¿ë½Ã 8¹øÁÙ ¼±¾ğ ºÒÇÊ¿ä
-	 setProperty »ç¿ë½Ã param=""À¸·Î °ª ÀúÀå -->
+<!-- <jsp:setProperty name="player" property="*"/> ì‚¬ìš©ì‹œ 8ë²ˆì¤„ ì„ ì–¸ ë¶ˆí•„ìš”
+	 setProperty ì‚¬ìš©ì‹œ param=""ìœ¼ë¡œ ê°’ ì €ì¥ -->
 
 <% 
-String userid= request.getParameter("userid");		// ÀÔ·Â¹ŞÀº ´Ğ³×ÀÓÀ» string¿¡ ÀúÀå(18¹øÁÙ¿¡ »ç¿ë)
+String userid= request.getParameter("userid");		// ì…ë ¥ë°›ì€ ë‹‰ë„¤ì„ì„ stringì— ì €ì¥(18ë²ˆì¤„ì— ì‚¬ìš©)
 %>
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>	 Login  </title>	
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">	<!-- ì—¬ê¸°ê°€ ì‹œì‘ -->
+<title> Welcome </title>
 </head>
+
+<style>
+body 
+{
+	margin:0 auto;
+	background:black;
+	background-attachment:fixed;
+}
+</style>
+
 <body>
-<%
-	if(userid.isEmpty()==false) 					// ´Ğ³×ÀÓÀ» ÀÔ·ÂÇßÀ»½Ã
-	{
-%>		<jsp:setProperty name="player" property="userid"/>	<!-- ´Ğ³×ÀÓÀ» beanÅ¬·¡½º·Î ÀúÀå-->
-		<jsp:getProperty name="player" property="userid"/> ´Ô °ÔÀÓ¿¡ ÀÔÀåÇÏ½Ã°Ú½À´Ï±î? <br><br>
-		<FORM METHOD=GET ACTiON="GameServer" >	
-		<INPUT TYPE="hidden" name="userid" value="<%=player.getUserid()%>">			<!--  id¸¦ gameserver·Î ³Ñ°ÜÁÜ -->
-		<input type="submit" value="°ÔÀÓ¹æ ÀÔÀå">				
-		</FORM>
-		<FORM METHOD=GET ACTiON="login.html" >	
-		<input type="submit" value="·Î±×ÀÎÃ¢À¸·Î">				
-		</FORM>
-		
-<%	}
-	else											// ´Ğ³×ÀÓÀ» ÀÔ·ÂÇÏÁö ¾Ê¾ÒÀ» ½Ã 
-	{ 												// °æ°íÃ¢ Ãâ·Â
-%>	<script type="text/javascript">alert("´Ğ³×ÀÓÀ» ÀÔ·ÂÇÏ¼¼¿ä!!");history.back();</script>
-<%  }%>
+
+<div align="center" style="border: height: 100px; padding: 700px 0px 0px 0px;
+ margin:0 auto; background-image:url(./img/login.jpg); background-repeat:no-repeat;
+background-position: 50% 50%; background-size: contain; " >
+</div>
+
+<div align="center" style="border: height: 100px; padding: 10px 0px 0px 0px;
+ margin:0 auto; " >
+
+
+<font color = "white" size="3px">ì‚¬ìš©í•˜ì‹¤ ë‹‰ë„¤ì„ì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤</font>	
+	<FORM METHOD=POST ACTiON="login.jsp" >				<!-- submit ëˆ„ë¥¼ì‹œ ì´ë™í•  í˜ì´ì§€ -->
+	ë‹‰ë„¤ì„ : <INPUT TYPE="text" name="userid" size="15">	<!-- name = login.jspë¡œ ë„˜ê¸¸ë³€ìˆ˜-->
+	<input type="submit" value="ì ‘ì†">					<!-- submitë²„íŠ¼ í‘œì‹œë‚´ìš©="ì ‘ì†" -->
+	</FORM>
+	
+</div>
+
 </body>
 </html>
