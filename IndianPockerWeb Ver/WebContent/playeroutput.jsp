@@ -96,14 +96,23 @@
 
 			<!-- 상태창 출력 부분 -->
 			<div class="state" align="center">
+				<%if(nowplayer!=null){ %>
 				<jsp:getProperty name="player" property="userorder"/> 차례입니다.<br>
+				<%} if(enemybetchip!=null) {%>
 				상대가 베팅한 칩:<jsp:getProperty name="enemy" property="betchip" /><br>
+				<%} if(myaccchips!=null){ %>
 				내누적:<jsp:getProperty name="player" property="useraccchips" /> 
+				<%} if(enemyaccchips!=null){ %>
 				상대누적:<jsp:getProperty name="enemy" property="useraccchips" />
+				<%} if(msg!=null){ %>
 				<br><%=msg %><br>
+				<%} if(losemsg!=null){ %>
 				<%=losemsg%><br>
+				<%} if(winmsg!=null){ %>
 				<%=winmsg %><br>
+				<%} if(penalty!=null){ %>
 				<%=penalty %>
+				<%} %>
 			</div>
 
 			<!-- 배팅창 부분 -->
@@ -134,6 +143,7 @@
 				</FORM>
 				<%if(open==null){}		
 				else if(open.equals("open")){ %>
+				<BR>
 				<FORM METHOD=GET ACTiON="GameServer">
 					<INPUT TYPE="hidden" name="nextround" value="kk"> 
 					<INPUT TYPE="hidden" name="checkid" value="<%=player.getUserid()%>">

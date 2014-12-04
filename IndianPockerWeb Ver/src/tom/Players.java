@@ -60,14 +60,14 @@ public class Players {
 		}
 	}
 	
-	//**********승리한 횟수함수**********//
+	//%%%%%%%%%% 승리한 횟수함수 %%%%%%%%%%//
 	public void increaseWin(Integer earn)
 	{
 		win++;
 		chips=earn+chips;
 	}
 	
-	//**********라운드 포기 표시 함수**********//
+	//%%%%%%%%%% 라운드 포기 표시 함수 %%%%%%%%%%//
 	public void changeLose(Integer n)
 	{
 		if(n==0)
@@ -76,14 +76,14 @@ public class Players {
 			nowlose--;
 	}
 	
-	//**********배팅초기화함수**********//
+	//%%%%%%%%%% 배팅초기화함수 %%%%%%%%%%//
 	public void initBetting()
 	{
 		accchip=0;
 		betchip=0;
 	}
 			
-	//**********기본배팅함수**********//
+	//%%%%%%%%%% 기본배팅함수 %%%%%%%%%%//
 	public void basicBetting()
 	{
 		// 기본 배팅
@@ -91,7 +91,7 @@ public class Players {
 		chips=chips-1;
 	}
 	
-	//**********패널티함수**********//
+	//%%%%%%%%%% 패널티함수 %%%%%%%%%%//
 	public void penalty()
 	{
 		accchip=accchip+10;
@@ -111,14 +111,14 @@ public class Players {
 		}
 	}
 	
-	//**********베팅 수정 함수**********//
+	//%%%%%%%%%% 베팅 수정 함수 %%%%%%%%%%//
 	public void wrongBetchips()
 	{
 		accchip = accchip-betchip;	// 칩 원상복귀
 		chips=chips+betchip;
 	}
 	
-	//**********제대로 베했을때  함수**********//
+	//%%%%%%%%%% 제대로 베했을때  함수 %%%%%%%%%%//
 	public void rightBetchips()
 	{
 		System.out.printf("%d개 칩을 배팅했습니다.누적 %d \n",betchip,accchip);

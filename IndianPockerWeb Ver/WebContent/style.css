@@ -71,10 +71,6 @@ html{
 }
 .my_card
 {
-	/*background-image:url("./img/bcard.png");
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
-	background-size:180px;*/
 	line-height: 250px;
 	width:250px;
 	height:300px;
@@ -83,7 +79,7 @@ html{
 }
 .state
 {
-	color:#000000;
+	color:#ffffff;
 	font-weight:bold;
 	font-size:15pt;
 	line-height: 50px;
@@ -95,8 +91,8 @@ html{
 }
 .bet
 {
+	color:#ffffff;
 	line-height: 100px;
-	background-color:#ff8080;
 	margin-top:-25px;
 	margin-left:250px;
 	padding:0px;
