@@ -346,6 +346,10 @@ public class GameServer extends HttpServlet {
 					}
 									
 					else {					// -스스로 바보같이 배팅했는지 체크
+																			// 남은 칩 갯수가 총1개일때 0이 베팅가능하도록...
+						if(player1.getChips()+player1.getAccchip()==1 && player1.getBetchip()==0) checkbetting = 3;
+						else if(player2.getChips()+player2.getAccchip()==1 && player1.getBetchip()==0) checkbetting = 3;
+						
 						if(checkbetting==-1) {				// 숫자입력이 아닐 경우 다시 돌려보냄 
 							out.println("<script type='text/javascript'>"
 							+ "alert('숫자만 입력가능합니다.');history.back();</script>");
@@ -399,6 +403,10 @@ public class GameServer extends HttpServlet {
 					}
 					
 					else { 			// -스스로 바보같이 배팅안했는지 체크
+																			// 남은 칩 갯수가 총1개일때 0이 베팅가능하도록...
+						if(player1.getChips()+player1.getAccchip()==1 && player2.getBetchip()==0) checkbetting = 3;
+						else if(player2.getChips()+player2.getAccchip()==1 && player2.getBetchip()==0) checkbetting = 3;
+						
 						if(checkbetting==-1) {
 							out.println("<script type='text/javascript'>"
 							+ "alert('숫자만 입력가능합니다.');history.back();</script>");
