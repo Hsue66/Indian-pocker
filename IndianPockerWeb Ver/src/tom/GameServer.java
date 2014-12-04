@@ -437,12 +437,20 @@ public class GameServer extends HttpServlet {
 		
 	out.println("<html><head>");							// 3초마다 GameServer 새로고침
 	out.println("<meta http-equiv='refresh'content = '2; url=GameServer'>");
-	out.println("</head><body>");							
-	if(rejoin==0) out.println("<h3>상대를 기다리는 중입니다....</h3>");
-	else out.println("<h3>다음 라운드 로딩중.....</h3>");
-	out.println("--현재 접속중인 플레이어--<br>");
-	for(int i=0; i<2; i++) out.println(saveid[i]+"<br>");	// 모든 로그인 확인 메시지 출력
-	out.println("</head><body>");
+	/*** 배경화면을 위한 css설정  ***/
+	out.println("<style type='text/css'>");
+	out.println("html{height: 100%;}");
+	out.println("body{position:relative; margin:0; padding:0; height: 100%}"
+			+ "#bg{position:absolute; top:0; left:0; width:100%; height:100%;"
+			+ "z-index:-1; overflow:hidden}</style>");
+	out.println("</head><body text=white>"); // 출력 텍스트의 색을 흰색으로 한다.						
+	out.println("<div id='bg'><img src='./img/waitroom.png' alt='' width='100%' height='100%'></div>");
+	out.println("<br><br><br><br><br><br><br><br><br>");
+	/* 게임이 진행중이지 않을때에는 대기화면을 출력해주고 게임 진행중에는 다음 라운드 시작전에 출력  */
+	if(rejoin==0) out.println("<center><h3>상대를 기다리는 중입니다....</h3></center>");
+	else out.println("<center><h3>다음 라운드 로딩중.....</h3></center>");
+	out.println("<center>--현재 접속중인 플레이어--<br></center>");
+	for(int i=0; i<2; i++) out.println("<center>"+saveid[i]+"</center><br>");	// 모든 로그인 확인 메시지 출력
 	out.println("</body></html>");
 	out.close();	
 
