@@ -1,21 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="KSC5601"%>
 
 <jsp:useBean id="player" class="tom.PlayerInfo" scope="session"/>
-<!-- <jsp:setProperty name="player" property="*"/> ì‚¬ìš©ì‹œ 8ë²ˆì¤„ ì„ ì–¸ ë¶ˆí•„ìš”
-	 setProperty ì‚¬ìš©ì‹œ param=""ìœ¼ë¡œ ê°’ ì €ì¥ -->
+<!-- <jsp:setProperty name="player" property="*"/> »ç¿ë½Ã 8¹øÁÙ ¼±¾ğ ºÒÇÊ¿ä
+	 setProperty »ç¿ë½Ã param=""À¸·Î °ª ÀúÀå -->
 
 <% 
-String userid= request.getParameter("userid");		// ì…ë ¥ë°›ì€ ë‹‰ë„¤ì„ì„ stringì— ì €ì¥(18ë²ˆì¤„ì— ì‚¬ìš©)
-%>
-
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="KSC5601"%>
-
-<jsp:useBean id="player" class="tom.PlayerInfo" scope="session"/>
-<!-- <jsp:setProperty name="player" property="*"/> ì‚¬ìš©ì‹œ 8ë²ˆì¤„ ì„ ì–¸ ë¶ˆí•„ìš”
-	 setProperty ì‚¬ìš©ì‹œ param=""ìœ¼ë¡œ ê°’ ì €ì¥ -->
-
-<% 
-String userid= request.getParameter("userid");		// ì…ë ¥ë°›ì€ ë‹‰ë„¤ì„ì„ stringì— ì €ì¥(18ë²ˆì¤„ì— ì‚¬ìš©)
+String userid= request.getParameter("userid");		
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -23,7 +13,6 @@ String userid= request.getParameter("userid");		// ì…ë ¥ë°›ì€ ë‹‰ë„¤ì„ì„ str
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>	 Login  </title>	
 </head>
-
 
 <style>
 body 
@@ -35,32 +24,28 @@ body
 </style>
 
 <body>
-
-
 <div align="center" style="border: height: 100px; padding: 700px 0px 0px 0px;
  margin:0 auto; background-image:url(wait.png); background-repeat:no-repeat;
-background-position: 50% 50%; background-size: cover; " >
+background-position: 50% 50%; background-size: cover; ">
 </div>
-
-
 <div align="center" style="border: height: 100px; padding: 10px 0px 0px 0px;
  margin:0 auto; " >
  
 <%
-	if(userid.isEmpty()==false) 					// ë‹‰ë„¤ì„ì„ ì…ë ¥í–ˆì„ì‹œ
+	if(userid.isEmpty()==false) 					// ´Ğ³×ÀÓÀ» ÀÔ·ÂÇßÀ»½Ã
 	{
-%>		<jsp:setProperty name="player" property="userid"/>	<!-- ë‹‰ë„¤ì„ì„ beaní´ë˜ìŠ¤ë¡œ ì €ì¥-->
+%>		<jsp:setProperty name="player" property="userid"/>	<!-- ´Ğ³×ÀÓÀ» beanÅ¬·¡½º·Î ÀúÀå-->
 		<font color = "white" size="3px"><jsp:getProperty name="player" property="userid"/></font>
-		<font color = "white" size="3px">ë‹˜ ê²Œì„ì— ì…ì¥í•˜ì‹œê² ìŠµë‹ˆê¹Œ?</font> <br><br>
+		<font color = "white" size="3px"> ´Ô °ÔÀÓ¿¡ ÀÔÀåÇÏ½Ã°Ú½À´Ï±î? </font> <br><br>
 		<FORM METHOD=GET ACTiON="GameServer" >	
-		<INPUT TYPE="hidden" name="userid" value="<%=player.getUserid()%>">			<!--  idë¥¼ gameserverë¡œ ë„˜ê²¨ì¤Œ -->
-		<input type="button" value="ë¡œê·¸ì¸ì°½ìœ¼ë¡œ" onclick=location.href('login.html') > <!--  ë¡œê·¸ì¸ì°½ìœ¼ë¡œ ì´ë™ì‹œ  -->
-		<input type="submit" value="ê²Œì„ë°© ì…ì¥">				
-	</FORM>
+		<INPUT TYPE="hidden" name="userid" value="<%=player.getUserid()%>">			<!--  id¸¦ gameserver·Î ³Ñ°ÜÁÜ -->
+		<input type="submit" value="°ÔÀÓ¹æ ÀÔÀå"></FORM>
+		<FORM METHOD=GET ACTiON="login.html" >	
+		<input type="submit" value="·Î±×ÀÎÃ¢À¸·Î">	</FORM>			
 <%	}
-	else											// ë‹‰ë„¤ì„ì„ ì…ë ¥í•˜ì§€ ì•Šì•˜ì„ ì‹œ 
-	{ 												// ê²½ê³ ì°½ ì¶œë ¥
-%>	<script type="text/javascript">alert("ë‹‰ë„¤ì„ì„ ì…ë ¥í•˜ì„¸ìš”!!");history.back();</script>
+	else											// ´Ğ³×ÀÓÀ» ÀÔ·ÂÇÏÁö ¾Ê¾ÒÀ» ½Ã 
+	{ 												// °æ°íÃ¢ Ãâ·Â
+%>	<script type="text/javascript">alert("´Ğ³×ÀÓÀ» ÀÔ·ÂÇÏ¼¼¿ä!!");history.back();</script>
 <%  }%>
 </div>
 </body>
