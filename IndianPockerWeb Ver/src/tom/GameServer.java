@@ -455,10 +455,10 @@ public class GameServer extends HttpServlet {
 	out.println("<div id='bg'><img src='./img/waitroom.png' alt='' width='100%' height='100%'></div>");
 	out.println("<br><br><br><br><br><br><br><br><br>");
 	/* 게임이 진행중이지 않을때에는 대기화면을 출력해주고 게임 진행중에는 다음 라운드 시작전에 출력  */
-	if(rejoin==0) out.println("<center><h3>상대를 기다리는 중입니다....</h3></center>");
+	if(rejoin==0) out.println("<center><h3>상대를 기다리는 중입니다....</h3><br></center>");
 	else out.println("<center><h3>다음 라운드 로딩중.....</h3></center>");
 	out.println("<center>--현재 접속중인 플레이어--<br></center>");
-	for(int i=0; i<2; i++) out.println("<center>"+saveid[i]+"</center><br>");	// 모든 로그인 확인 메시지 출력
+	for(int i=0; i<2; i++) out.println("<center>"+saveid[i]+"</center>");	// 모든 로그인 확인 메시지 출력
 	out.println("</body></html>");
 	out.close();	
 
